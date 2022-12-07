@@ -1,12 +1,15 @@
 package org.alatin.raceResult;
 
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import org.alatin.timeDuration.TimeDuration;
 
 public class RaceResults {
-	HashMap<String, TimeDuration> tagMap;
-	TimeDuration timeDuration;
+	private HashMap<String, TimeDuration> tagMap;
 
 	public RaceResults() {
 		super();
@@ -19,7 +22,17 @@ public class RaceResults {
 	}
 
 	void printResults() {
-		this.tagMap.entrySet().stream();
+		// this.tagMap.values().stream( t -> );
+		Comparator<TimeDuration> byTimeinSeconds = (TimeDuration obj1, TimeDuration obj2) -> Integer
+				.valueOf(obj1.getNumberSeconds()).compareTo(Integer.valueOf(obj2.getNumberSeconds()));
+
+		LinkedHashMap<String, TimeDuration> sortedMap = this.tagMap.entrySet().stream()
+				.sorted(Map.Entry.<String, TimeDuration>comparingByValue(byTimeinSeconds))
+				.collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, (e1, e2) -> e1, LinkedHashMap::new));
+
+		sortedMap.entrySet().forEach(entry -> {
+			System.out.println(entry.getKey() + ": " + entry.getValue());
+		});
 	}
 
 }

@@ -20,13 +20,17 @@ public class TimeDuration {
 		int min = inter % 60;
 		int hours = inter / 60;
 
-		String strSec = (sec < 10) ? "0" + Integer.toString(sec) : Integer.toString(sec);
-		String strmin = (min < 10) ? "0" + Integer.toString(min) : Integer.toString(min);
-		String strHours = (hours < 10) ? "0" + Integer.toString(hours) : Integer.toString(hours);
+		String strSec = Integer.toString(sec);
+		String strmin = Integer.toString(min);
+		String strHours = Integer.toString(hours);
 		// System.out.println(strHours + ":" + strmin + ":" + strSec);
 		String retour = (hours == 0) ? (min == 0) ? strSec + "s" : strmin + "m " + strSec + "s"
 				: strHours + "h " + strmin + "m " + strSec + "s";
 		return retour;
+	}
+
+	public int getNumberSeconds() {
+		return numberSeconds;
 	}
 
 }
