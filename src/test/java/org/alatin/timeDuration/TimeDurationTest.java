@@ -1,6 +1,7 @@
 package org.alatin.timeDuration;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -23,6 +24,9 @@ class TimeDurationTest {
 		assertEquals(expected2, duration2.toString());
 		assertEquals(expected3, duration3.toString());
 		assertEquals(expected4, duration4.toString());
+		Exception exception = assertThrows(Exception.class, () -> new TimeDuration(-8));
+		assertEquals("No negative value", exception.getMessage());
+		// assertEquals(0, 0);
 
 	}
 
